@@ -1,4 +1,4 @@
-<img width="1852" height="972" alt="image" src="https://github.com/user-attachments/assets/64e81251-fd49-4972-b0f7-076a54b852b7" /># 🧩 TerraWeek Day 2 — HCL Deep Dive: Variables, Types & Expressions
+# 🧩 TerraWeek Day 2 — HCL Deep Dive: Variables, Types & Expressions
 
 **Date:** Monday, 13th July 2026
 
