@@ -85,7 +85,7 @@ Step 2: Install Terraform on Ubuntu (Official HashiCorp APT Repository)
 
 -->First, update your package list and install the required tools: sudo apt update
 
--->Install terraform: sudo apt install -y gnupg software-properties-common curl
+-->sudo apt install -y gnupg software-properties-common curl
 
 -->Add the official HashiCorp GPG key: curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
 
@@ -97,11 +97,15 @@ Step 2: Install Terraform on Ubuntu (Official HashiCorp APT Repository)
 
 Step 3: Verify the Installation: terraform version
 
+<img width="1062" height="667" alt="image" src="https://github.com/user-attachments/assets/854c1617-3ae1-42d8-8e1c-ae6aebaddba4" />
+
 -->We can also confirm terraform install or not by running command: terraform -help
 
 <img width="591" height="355" alt="t2i1" src="https://github.com/user-attachments/assets/301c43ad-a88e-4f19-aea6-b907b366b493" />
 
-Step 4: Install the VS Code Extension
+<img width="1110" height="720" alt="image" src="https://github.com/user-attachments/assets/3d96a2f2-1ac3-4208-bb98-5865f5f0c07e" />
+
+Step 4: Install the VS Code Extension: HashiCorp Terraform
 
 <img width="700" height="377" alt="t2i2" src="https://github.com/user-attachments/assets/6232eb42-2596-4fd5-9f6e-5ebe842c8383" />
 
@@ -112,6 +116,8 @@ Step 5: Verify the VS Code Extension:
 -->Create file: touch main.tf & write the following code into the file,
 
 <img width="540" height="252" alt="image" src="https://github.com/user-attachments/assets/53a2c550-c15b-4c6d-9e85-454568c7e09c" />
+
+<img width="932" height="486" alt="image" src="https://github.com/user-attachments/assets/c1f65371-d977-4e5a-b77c-5cda600b0a9a" />
 
 ### Task 3: Learn 6 Crucial Terraform Terminologies
 Explain each of these **in your own words** with a one-line example:
@@ -225,6 +231,12 @@ Step 8: Destroy the Resources: terraform destroy
 **Terraform Workflow Summary:**
 
 <img width="857" height="372" alt="t4i9" src="https://github.com/user-attachments/assets/30b96566-cb39-4263-87ae-27b4c458efdc" />
+
+<img width="1857" height="956" alt="image" src="https://github.com/user-attachments/assets/9f8fa9f3-a726-4955-a8b7-a766a0cd6da7" />
+<img width="1797" height="960" alt="image" src="https://github.com/user-attachments/assets/b8c5b92c-89e1-4370-8a3c-7563913a011e" />
+<img width="1835" height="977" alt="image" src="https://github.com/user-attachments/assets/0126fe92-ed3b-4348-8db7-e74fa42d8837" />
+<img width="1865" height="970" alt="image" src="https://github.com/user-attachments/assets/4514f2c3-8bf0-4c05-9277-a322e48d6bbe" />
+<img width="1857" height="950" alt="image" src="https://github.com/user-attachments/assets/d7e0d694-2e0d-417c-86da-cac4a2b8faab" />
 
 ---
 
