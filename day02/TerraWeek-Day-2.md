@@ -131,6 +131,59 @@ Q. What are Terraform Variables?
 -->Variables allow you to make your Terraform configurations dynamic and reusable. Instead of hardcoding values, you can define them as variables and provide different values for different environments.
 <img width="682" height="335" alt="image" src="https://github.com/user-attachments/assets/574770ed-f656-451b-8e54-7e93b188bf52" />
 
+Complete Sample variables.tf:
+
+1. # Primitive Type:
+<img width="772" height="520" alt="image" src="https://github.com/user-attachments/assets/c8beaacc-7798-47cc-afdc-2980b2559630" />
+
+2. # Collection Type:
+<img width="662" height="691" alt="image" src="https://github.com/user-attachments/assets/16636c09-132d-4121-9d61-29f670919988" />
+
+3. Structural Types:
+<img width="672" height="677" alt="image" src="https://github.com/user-attachments/assets/c068a357-611c-4b72-a2be-47bb2a5b230b" />
+
+4. Validation Example:
+<img width="705" height="322" alt="image" src="https://github.com/user-attachments/assets/51b07c0f-2f10-4017-89bb-9347b0a01ed9" />
+
+5. Sensitive Variable:
+<img width="601" height="147" alt="image" src="https://github.com/user-attachments/assets/100c4ffb-5735-413a-9d46-99b2a89d5a2f" />
+
+**Understanding Each Variable Type:**
+
+1. Primitive Types: Primitive types store a single value.
+<img width="697" height="792" alt="image" src="https://github.com/user-attachments/assets/19ae0fc5-a56e-465f-a5bb-19470507f0cd" />
+<img width="692" height="350" alt="image" src="https://github.com/user-attachments/assets/5b7ecf43-fe68-4664-9c6f-517fe660c89f" />
+
+2. Collection Types: Collections store multiple values.
+<img width="715" height="587" alt="image" src="https://github.com/user-attachments/assets/5711fb08-4ecf-4520-9026-c6ce53a2c40c" />
+<img width="712" height="557" alt="image" src="https://github.com/user-attachments/assets/2ce79a00-9b8a-40d9-8949-18a7e7934d0c" />
+<img width="677" height="622" alt="image" src="https://github.com/user-attachments/assets/3709a7f4-4beb-4ffe-86d9-d44d3e7209b9" />
+
+3. Structural Types: Structural types combine multiple data types.
+Object: An object groups related named attributes, making it useful for representing structured configuration like server settings.
+<img width="767" height="502" alt="image" src="https://github.com/user-attachments/assets/cf17c1e7-5315-4778-a717-242e23079da1" />
+
+Tuple: Unlike an object, tuple elements are identified by position, not by name.
+<img width="722" height="642" alt="image" src="https://github.com/user-attachments/assets/8cf97577-5246-4be9-8548-b8842fd2a6e3" />
+
+Variable Validation: Validation ensures users provide only acceptable values.
+<img width="697" height="832" alt="image" src="https://github.com/user-attachments/assets/11f715f0-61b1-4c78-afd6-e08cf4429847" />
+<img width="722" height="197" alt="image" src="https://github.com/user-attachments/assets/85f92e58-a407-4f3c-86b1-c429fbd4f5ee" />
+
+Sensitive Variables: Some values, such as passwords, API keys, or tokens, should not be displayed in Terraform output.
+<img width="751" height="420" alt="image" src="https://github.com/user-attachments/assets/6b0dff22-9d92-4a95-a5db-3de4c7e8e3cf" />
+
+**Note:** sensitive = true hides the value from Terraform's CLI output, but it does not encrypt it in the Terraform state file. Protect your state file by storing it securely (for example, in a remote backend with encryption and access controls).
+
+**Summary:**
+<img width="845" height="802" alt="image" src="https://github.com/user-attachments/assets/dd14e743-6966-4fbd-908c-35f657e60a41" />
+
+
+
+
+
+ 
+
 
 
 
