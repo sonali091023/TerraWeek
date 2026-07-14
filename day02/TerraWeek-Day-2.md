@@ -1,4 +1,4 @@
-# 🧩 TerraWeek Day 2 — HCL Deep Dive: Variables, Types & Expressions
+<img width="1852" height="972" alt="image" src="https://github.com/user-attachments/assets/64e81251-fd49-4972-b0f7-076a54b852b7" /># 🧩 TerraWeek Day 2 — HCL Deep Dive: Variables, Types & Expressions
 
 **Date:** Monday, 13th July 2026
 
@@ -315,9 +315,13 @@ Step 4: Create an Execution Plan: terraform plan -var 'container_name=tws-web' -
 
 <img width="730" height="427" alt="image" src="https://github.com/user-attachments/assets/bd2e147c-9d5f-463e-95d1-f6aeb08958d7" />
 
+<img width="1822" height="970" alt="image" src="https://github.com/user-attachments/assets/0431d106-73a7-4970-b904-034ba477a55c" />
+
 Step 5: Apply the Configuration: terraform apply -var 'container_name=tws-web' -var 'external_port=8080'
 
 <img width="690" height="550" alt="image" src="https://github.com/user-attachments/assets/1345fcad-ef98-4fff-aa9c-72f6294f3bdd" />
+
+<img width="1842" height="976" alt="image" src="https://github.com/user-attachments/assets/0a9cfb0a-353a-4595-9a6d-f4df9e354d6f" />
 
 Step 6: Verify the Container: docker ps
 
@@ -325,9 +329,15 @@ Step 6: Verify the Container: docker ps
 
 Step 7: View Outputs: terraform output [Note: Outputs are useful because they expose important information after deployment.]
 
+<img width="1857" height="952" alt="image" src="https://github.com/user-attachments/assets/58967aaf-12cf-43c6-9de1-c9aa68a291d5" />
+
+<img width="1855" height="967" alt="image" src="https://github.com/user-attachments/assets/962e1778-5907-4ba2-9bdb-e10ab3006b6f" />
+
 Step 8: Destroy the Infrastructure: terraform destroy -var 'container_name=tws-web' -var 'external_port=8080'
 
 <img width="692" height="582" alt="image" src="https://github.com/user-attachments/assets/a8a7bd14-7fea-4373-840f-6b4d743311c1" />
+
+<img width="1852" height="972" alt="image" src="https://github.com/user-attachments/assets/433b916a-ac69-451b-9328-6f64677620d3" />
 
 Using terraform.tfvars: Instead of passing variables every time with -var, create a file named terraform.tfvars.
 
