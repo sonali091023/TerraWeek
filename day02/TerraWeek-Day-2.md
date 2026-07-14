@@ -291,6 +291,55 @@ terraform destroy -var 'container_name=tws-web' -var 'external_port=8080'
 
 Then try the same run using a **`terraform.tfvars`** file instead of `-var` flags and note the difference.
 
+**Steps to follow:**
+
+Deploy an Nginx container using Terraform.
+
+-->You will learn how to: Initialize Terraform, Review an execution plan, Apply infrastructure changes, Access outputs, Destroy infrastructure, Use terraform.tfvars instead of -var
+
+Step 1: Verify Prerequisites: 
+
+-->Ensure Docker is installed and running: docker --version
+
+-->Check Docker daemon: docker ps [Note: If you see running containers or an empty list, Docker is working.]
+
+Step 2: Go to the Example Directory: cd example
+
+-->Verify the files: ls [Expected: main.tf, variables.tf, outputs.tf, terraform.tfvars (optional)]
+
+Step 3: Initialize Terraform: terraform init
+
+<img width="677" height="295" alt="image" src="https://github.com/user-attachments/assets/93fa7012-bc25-4f6d-a0fe-78f14d378369" />
+
+Step 4: Create an Execution Plan: terraform plan -var 'container_name=tws-web' -var 'external_port=8080'
+
+<img width="730" height="427" alt="image" src="https://github.com/user-attachments/assets/bd2e147c-9d5f-463e-95d1-f6aeb08958d7" />
+
+Step 5: Apply the Configuration: terraform apply -var 'container_name=tws-web' -var 'external_port=8080'
+
+<img width="690" height="550" alt="image" src="https://github.com/user-attachments/assets/1345fcad-ef98-4fff-aa9c-72f6294f3bdd" />
+
+Step 6: Verify the Container: docker ps
+
+-->Open your browser: http://localhost:8080 [Expected: Welcome to nginx! & This confirms Terraform successfully deployed the container.]
+
+Step 7: View Outputs: terraform output [Note: Outputs are useful because they expose important information after deployment.]
+
+Step 8: Destroy the Infrastructure: terraform destroy -var 'container_name=tws-web' -var 'external_port=8080'
+
+<img width="692" height="582" alt="image" src="https://github.com/user-attachments/assets/a8a7bd14-7fea-4373-840f-6b4d743311c1" />
+
+Using terraform.tfvars: Instead of passing variables every time with -var, create a file named terraform.tfvars.
+
+<img width="725" height="512" alt="image" src="https://github.com/user-attachments/assets/c4b366b5-ff80-481f-aebc-f4744b5ecdab" />
+
+**-var vs terraform.tfvars:**
+
+<img width="731" height="827" alt="image" src="https://github.com/user-attachments/assets/09f8b3b6-bcb9-4c77-970d-4421fcdec7d3" />
+
+Note: 
+<img width="790" height="232" alt="image" src="https://github.com/user-attachments/assets/0d6af661-62f5-4228-a8e0-82982daac183" />
+
 ---
 
 ## 📊 Variable Precedence (highest wins)
