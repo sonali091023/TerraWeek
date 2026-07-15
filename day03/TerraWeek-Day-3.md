@@ -158,8 +158,8 @@ Q. Why should you pin provider versions?
 - Explain the difference: **resources create/manage**, **data sources only read**.
 
 -->This task teaches one of the most important Terraform concepts: 
-- Resources** → Create and manage infrastructure. 
-- Data Sources** → Read information about existing infrastructure without creating or modifying it.
+- **Resources** → Create and manage infrastructure. 
+- **Data Sources** → Read information about existing infrastructure without creating or modifying it.
 
 Step 1: Provider Configuration: 
 
@@ -182,7 +182,28 @@ Step 3: Create a Resource: Create an S3 bucket: [Expected: This creates a brand-
 
 <img width="712" height="402" alt="image" src="https://github.com/user-attachments/assets/ec7048ff-f430-47c4-9695-023e98a72c7e" />
 
--->Run Terraform
+**Run Terraform:**
+
+-->initilise terraform: terraform init
+
+-->Preview changes: terraform plan
+
+-->terraform apply: terraform apply
+
+<img width="867" height="392" alt="image" src="https://github.com/user-attachments/assets/fad9f7d8-5cd6-48ad-9ca2-704374af7bfc" />
+
+**Visual Understanding:**
+
+<img width="627" height="805" alt="image" src="https://github.com/user-attachments/assets/eb8d61c8-815a-4204-a376-f9e5c576855e" />
+
+**Note:**
+- Resources create, update, and delete infrastructure that Terraform manages in its state. Examples include S3 buckets, EC2 instances, and VPCs.
+- Data sources only read information about existing infrastructure or provider metadata. They never create or modify resources. Examples include Availability Zones, AMIs, and the default VPC.
+
+In this task, I used:
+- resource "aws_s3_bucket" to create a new S3 bucket.
+- data "aws_availability_zones" and data "aws_vpc" to read existing AWS information without making any changes.
+
 
 
 ### Task 3: Provision a Cloud Stack
