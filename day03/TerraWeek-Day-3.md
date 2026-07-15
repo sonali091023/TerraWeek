@@ -57,6 +57,79 @@ Internet ──▶ [IGW] ──▶ [Route Table] ──▶ [ Public Subnet ] ─
 - Explain **why version pinning matters** and what the `~>` (pessimistic) operator does.
 - **Bonus:** configure a second provider **alias** (e.g. a second AWS region) and explain when you'd use it.
 
+**Steps to follow:**
+
+-->This task is about understanding Terraform Providers, version pinning, and provider aliases. Let's complete it step by step.
+
+Task 1: Providers & Version Pinning: Create versions.tf file: vi versions.tf
+
+<img width="456" height="322" alt="image" src="https://github.com/user-attachments/assets/a5342716-9be6-4545-a1df-6527a2ac3d4e" />
+
+Step 2: Configure the Provider: Create provider.tf: vi providers.tf
+
+<img width="537" height="147" alt="image" src="https://github.com/user-attachments/assets/d2448581-8009-4cac-858c-49d3e6a04c1c" />
+
+-->This tells Terraform: Use the AWS provider & Deploy resources in the Mumbai (ap-south-1) region.
+
+**Lets Understand Each Part:**
+
+<img width="427" height="487" alt="image" src="https://github.com/user-attachments/assets/3a79a80f-20f5-4ea0-893a-082bd385056d" />
+
+<img width="786" height="622" alt="image" src="https://github.com/user-attachments/assets/ca9a174a-5a7e-4c13-9387-5dc3785fb3b2" />
+
+<img width="780" height="682" alt="image" src="https://github.com/user-attachments/assets/90565c5c-f12f-4ae4-9b16-2473c544b980" />
+
+<img width="762" height="250" alt="image" src="https://github.com/user-attachments/assets/7dccd7bf-6f62-4db8-bb52-8f64c89eeaa7" />
+
+**Why Version Pinning Matters:**
+
+-->Without version pinning: Your Terraform code may suddenly fail after a provider upgrade. Version pinning ensures everyone uses compatible versions.
+
+<img width="677" height="362" alt="image" src="https://github.com/user-attachments/assets/4109b43a-4643-4d76-a090-506f91d0723a" />
+
+**Benefits:**
+- Predictable deployments
+- Reproducible infrastructure
+- Prevents breaking changes
+- Easier collaboration
+- Stable CI/CD pipelines
+
+Q. What Does ~> Mean?
+
+--> The **~>** operator is called the pessimistic version constraint. It allows updates within a compatible version range while preventing upgrades to versions that may introduce breaking changes.
+
+<img width="746" height="522" alt="image" src="https://github.com/user-attachments/assets/ca1cadb8-cd08-4660-a0a8-8b7677c292c4" />
+
+<img width="722" height="451" alt="image" src="https://github.com/user-attachments/assets/248aebcc-38f2-4dfe-8387-a8a1beef5308" />
+
+<img width="756" height="442" alt="image" src="https://github.com/user-attachments/assets/ad5e9951-2c73-425f-8d75-50771b27edf3" />
+
+<img width="912" height="246" alt="image" src="https://github.com/user-attachments/assets/ba4493db-1f8f-4beb-b7e0-9da497e57d01" />
+
+Bonus: Provider Alias: Sometimes you need to work with multiple configurations of the same provider, such as different AWS regions or different AWS accounts.
+
+<img width="832" height="557" alt="image" src="https://github.com/user-attachments/assets/034ef730-7231-4ffd-966a-b4378f8d0b9b" />
+
+-->A more practical example uses two different regions:
+
+<img width="770" height="255" alt="image" src="https://github.com/user-attachments/assets/03ebea5e-8885-4974-a1e8-47ec5c318e2a" />
+
+**Using the Alias:** Suppose you want an S3 bucket in Singapore. 
+
+<img width="772" height="472" alt="image" src="https://github.com/user-attachments/assets/016120b0-a3c1-493c-bae8-fbd5fe9c271a" />
+
+Q. When Would You Use Provider Aliases?
+
+<img width="852" height="207" alt="image" src="https://github.com/user-attachments/assets/6fb05203-0ecc-4f3d-9a59-e5059b85578d" />
+
+Q. Why should you pin provider versions?
+
+--> Version pinning ensures consistent and reproducible infrastructure deployments. It prevents unexpected breaking changes when new provider versions are released, allowing all team members and CI/CD pipelines to use compatible Terraform and provider versions.
+
+**Note:**
+
+<img width="882" height="262" alt="image" src="https://github.com/user-attachments/assets/0fb4bbb1-79d0-4663-91e2-2c081f5e3d3e" />
+
 ### Task 2: Resources vs Data Sources
 - Create at least one **resource** (something new).
 - Use at least one **`data`** source to *read* existing info (e.g. `aws_ami`, `aws_availability_zones`, or your default VPC).
