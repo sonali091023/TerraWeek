@@ -128,7 +128,29 @@ Q. Why should you pin provider versions?
 
 **Note:**
 
+**Command used:**
+
+-->terraform init
+
+-->terraform validate
+
+-->terraform plan
+
+-->terraform apply --auto-approve
+
 <img width="882" height="262" alt="image" src="https://github.com/user-attachments/assets/0fb4bbb1-79d0-4663-91e2-2c081f5e3d3e" />
+
+<img width="1790" height="942" alt="image" src="https://github.com/user-attachments/assets/8251bda9-adcb-4d82-8ccb-c5f30e196cf8" />
+
+<img width="1866" height="971" alt="image" src="https://github.com/user-attachments/assets/ba852a28-a912-46c4-9798-07298c298316" />
+
+<img width="1902" height="826" alt="image" src="https://github.com/user-attachments/assets/5547501f-23c8-4fcc-aab4-290dbe47a4f5" />
+
+<img width="1775" height="942" alt="image" src="https://github.com/user-attachments/assets/0e8d6571-838b-4863-a9de-cf8b7feffcb9" />
+
+<img width="1832" height="947" alt="image" src="https://github.com/user-attachments/assets/552b3891-ba5f-4079-98c5-f5f940bf7414" />
+
+<img width="1895" height="836" alt="image" src="https://github.com/user-attachments/assets/d0d18ac1-8879-4f0e-9d86-d7a0a3a10eb1" />
 
 ### Task 2: Resources vs Data Sources
 - Create at least one **resource** (something new).
