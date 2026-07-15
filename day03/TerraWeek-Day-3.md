@@ -128,6 +128,8 @@ Q. Why should you pin provider versions?
 
 **Note:**
 
+<img width="882" height="262" alt="image" src="https://github.com/user-attachments/assets/0fb4bbb1-79d0-4663-91e2-2c081f5e3d3e" />
+
 **Command used:**
 
 -->terraform init
@@ -137,8 +139,6 @@ Q. Why should you pin provider versions?
 -->terraform plan
 
 -->terraform apply --auto-approve
-
-<img width="882" height="262" alt="image" src="https://github.com/user-attachments/assets/0fb4bbb1-79d0-4663-91e2-2c081f5e3d3e" />
 
 <img width="1790" height="942" alt="image" src="https://github.com/user-attachments/assets/8251bda9-adcb-4d82-8ccb-c5f30e196cf8" />
 
@@ -156,6 +156,34 @@ Q. Why should you pin provider versions?
 - Create at least one **resource** (something new).
 - Use at least one **`data`** source to *read* existing info (e.g. `aws_ami`, `aws_availability_zones`, or your default VPC).
 - Explain the difference: **resources create/manage**, **data sources only read**.
+
+-->This task teaches one of the most important Terraform concepts: 
+- Resources** → Create and manage infrastructure. 
+- Data Sources** → Read information about existing infrastructure without creating or modifying it.
+
+Step 1: Provider Configuration: 
+
+<img width="652" height="142" alt="image" src="https://github.com/user-attachments/assets/9f3ea3e4-54d3-44b4-acb3-e1b4fcae7e47" />
+
+Step 2: Read Existing AWS Information (Data Sources): 
+
+<img width="801" height="537" alt="image" src="https://github.com/user-attachments/assets/d4ae4b21-3efe-426d-90db-96431a1967f2" />
+
+<img width="776" height="292" alt="image" src="https://github.com/user-attachments/assets/39dd00df-ff6c-44da-9265-d6e61d8ffe09" />
+
+Step 3: Create a Resource: Create an S3 bucket: [Expected: This creates a brand-new S3 bucket in your AWS account.]
+
+<img width="647" height="140" alt="image" src="https://github.com/user-attachments/assets/a3867148-b953-41a7-94dd-ac61a9caa7c0" />
+
+-->Create Complete main.tf: vi main.tf 
+<img width="772" height="455" alt="image" src="https://github.com/user-attachments/assets/16f2b52b-cbfb-47a8-b955-b82e525973e1" />
+
+-->Create outputs.tf: vi outputs.tf
+
+<img width="712" height="402" alt="image" src="https://github.com/user-attachments/assets/ec7048ff-f430-47c4-9695-023e98a72c7e" />
+
+-->Run Terraform
+
 
 ### Task 3: Provision a Cloud Stack
 Use the **AWS starter code in [`./example`](./example)** (or adapt to Azure/GCP). It builds a minimal, free-tier-friendly stack:
