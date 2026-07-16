@@ -358,8 +358,10 @@ Create multiple S3 buckets:
 
 **Note:** We prefer for_each because If we remove one bucket name: bucket2, Terraform only removes bucket2, But with count, removing the middle element can shift indexes and cause unnecessary replacements.
 
-3. depends_on — Explicit Dependency: Terraform usually infers dependencies from references.
+3. depends_on — Explicit Dependency:
 
+-->Terraform usually infers dependencies from references. **For eg: subnet_id = aws_subnet.public.id** So this already creates an implicit dependency.
+Sometimes you need to force the order. Now Terraform guarantees: **VPC --> Subnet --> Internet gateway --> EC2** even if the EC2 resource doesn't directly reference the Internet Gateway.
 <img width="717" height="612" alt="image" src="https://github.com/user-attachments/assets/5bb3895d-7fd8-40e4-8bfc-12b00f5dffdf" />
 <img width="690" height="306" alt="image" src="https://github.com/user-attachments/assets/d6e3bc10-b943-487c-a9d4-320031b8272e" />
 
@@ -374,12 +376,44 @@ Complete Example:
 Assignment Summary:
 <img width="1037" height="462" alt="image" src="https://github.com/user-attachments/assets/164760d6-9197-44a5-9606-c207592a7226" />
 
+**Run Terraform:**
+
+-->terraform init
+
+-->terraform validate
+
+-->terraform plan
+
+-->terraform apply --auto-approve
+
+-->terraform destroy
+
+<img width="1822" height="967" alt="image" src="https://github.com/user-attachments/assets/20ff7300-669e-4028-a08c-dccac1e7b3a7" />
+
+<img width="1852" height="967" alt="image" src="https://github.com/user-attachments/assets/8b534842-cdd7-4917-9b7d-5eba98843e57" />
+
+<img width="1866" height="971" alt="image" src="https://github.com/user-attachments/assets/e93665f1-4857-4ff9-a1ba-680042215c6f" />
+
+<img width="1852" height="971" alt="image" src="https://github.com/user-attachments/assets/fdb94455-24b5-434f-a0c1-930e2ab00c42" />
+
+<img width="1917" height="931" alt="image" src="https://github.com/user-attachments/assets/d1dfe2c6-6bb4-43f0-97df-6bc23152c5a7" />
+
+<img width="1912" height="935" alt="image" src="https://github.com/user-attachments/assets/5ef82be4-9c68-478f-8f3d-c3ff655a2abd" />
+
+<img width="1907" height="936" alt="image" src="https://github.com/user-attachments/assets/100fc146-347f-4aa3-bc7e-592e48483d49" />
+
+<img width="1912" height="930" alt="image" src="https://github.com/user-attachments/assets/06322c23-4852-4b8b-a421-a8bb6fdf17d1" />
+
 ### Task 5: Update & Destroy
 - Change a `tag` or the `instance_type`, run `terraform plan`, and read the diff — notice what forces **replace** vs **in-place update**.
 - **Always** finish with:
 ```bash
 terraform destroy   # type: yes  — avoid surprise bills!
 ```
+
+**Steps to follow:**
+
+
 
 ---
 
