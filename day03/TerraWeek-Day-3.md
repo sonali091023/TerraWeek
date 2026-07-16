@@ -176,6 +176,7 @@ Step 3: Create a Resource: Create an S3 bucket: [Expected: This creates a brand-
 <img width="647" height="140" alt="image" src="https://github.com/user-attachments/assets/a3867148-b953-41a7-94dd-ac61a9caa7c0" />
 
 -->Create Complete main.tf: vi main.tf 
+
 <img width="772" height="455" alt="image" src="https://github.com/user-attachments/assets/16f2b52b-cbfb-47a8-b955-b82e525973e1" />
 
 -->Create outputs.tf: vi outputs.tf
@@ -354,6 +355,7 @@ Create multiple S3 buckets:
 -->Update your s3 bucket resource: vi main.tf
 
 <img width="721" height="685" alt="image" src="https://github.com/user-attachments/assets/400d8df5-1543-4b6c-9a9f-3788b7e66b37" />
+
 <img width="742" height="357" alt="image" src="https://github.com/user-attachments/assets/e218070d-5fe1-4e00-a635-76cf2f09da42" />
 
 **Note:** We prefer for_each because If we remove one bucket name: bucket2, Terraform only removes bucket2, But with count, removing the middle element can shift indexes and cause unnecessary replacements.
@@ -363,11 +365,14 @@ Create multiple S3 buckets:
 -->Terraform usually infers dependencies from references. **For eg: subnet_id = aws_subnet.public.id** So this already creates an implicit dependency.
 Sometimes you need to force the order. Now Terraform guarantees: **VPC --> Subnet --> Internet gateway --> EC2** even if the EC2 resource doesn't directly reference the Internet Gateway.
 <img width="717" height="612" alt="image" src="https://github.com/user-attachments/assets/5bb3895d-7fd8-40e4-8bfc-12b00f5dffdf" />
+
 <img width="690" height="306" alt="image" src="https://github.com/user-attachments/assets/d6e3bc10-b943-487c-a9d4-320031b8272e" />
 
 4. lifecycle: The lifecycle block changes how Terraform manages resources.
 <img width="641" height="741" alt="image" src="https://github.com/user-attachments/assets/c7a4dac2-6e54-499a-b703-fcc7f7ddeb7c" />
+
 <img width="742" height="437" alt="image" src="https://github.com/user-attachments/assets/655caeb6-89b3-4279-b27e-0563cf40f59b" />
+
 <img width="705" height="600" alt="image" src="https://github.com/user-attachments/assets/54c1b694-c36a-47bb-aadb-2db6d40eed40" />
 
 Complete Example:
@@ -413,7 +418,92 @@ terraform destroy   # type: yes  — avoid surprise bills!
 
 **Steps to follow:**
 
+-->This task is about understanding how Terraform detects changes and what actions it takes. The key skill is learning to read the terraform plan output before making changes.
 
+**Update & Destroy: Objective:**
+- Modify an existing resource.
+- Run terraform plan.
+- Observe whether Terraform performs:
+  - In-place update
+  - Resource replacement
+- Destroy all resources after testing.
+
+Step 1: Verify Your Current Infrastructure: if have applied the infrastructure by running command: terraform apply
+
+-->You should have resources such as: VPC, Subnet, Internet Gateway, Security Group, EC2 Instance
+
+Step 2: Change a Tag (In-Place Update): Open your EC2 resource.
+
+<img width="847" height="802" alt="image" src="https://github.com/user-attachments/assets/27c94ac4-157d-4f5f-8437-4de6c8474e0f" />
+<img width="877" height="492" alt="image" src="https://github.com/user-attachments/assets/ecca4f1d-63ea-4acf-8b3a-834fdbc707bd" />
+
+Step 3: Change the Instance Type: 
+<img width="917" height="486" alt="image" src="https://github.com/user-attachments/assets/46c2f92b-d729-4d2a-b227-448cc14b6d6f" />
+
+-->Terraform will compare the current state with your desired configuration and show whether the change can be applied in place or requires replacement. The exact behavior depends on the AWS resource and the attributes being changed.
+
+**Understanding the Plan Symbols:** Terraform uses symbols to indicate planned actions:
+<img width="917" height="486" alt="image" src="https://github.com/user-attachments/assets/5bcbb2d3-372d-4dbc-9fd6-b66984fac239" />
+
+**How to Identify a Replacement:** When Terraform must replace a resource, the plan will explicitly indicate that replacement is required. For example:
+<img width="832" height="137" alt="image" src="https://github.com/user-attachments/assets/668b454f-9353-4cc3-a6bc-eb6a699f6145" />
+-->The phrase "forces replacement" in the plan is the important clue to look for.
+
+**Why Some Changes Replace Resources:**
+- Some resource attributes can be changed without recreating the resource (such as many tags).
+- Other attributes are immutable after creation. When those change, Terraform must:
+  - Destroy the existing resource.
+  - Create a new one.
+- This behavior is determined by the provider and the underlying cloud service.
+
+-->Apply the Changes: terraform apply & then Review the plan again, then type: yes
+
+-->View the Updated Infrastructure: terraform show OR terraform output
+
+Step 4: Destroy Everything: terraform destroy So Terraform will display everything it plans to remove, To confirm type yes and Terraform deletes all managed resources.
+
+-->Verify Cleanup: After the destroy completes, verify that nothing remains: terraform state list
+
+-->If successful, there should be no managed resources left in the state. You can also check the AWS Console to confirm that the EC2 instance, VPC, subnet, and other resources have been removed.
+
+**Terraform Run:**
+
+-->Make some chnages like for example name of the ec2 instance any run command: terraform plan
+<img width="1862" height="952" alt="image" src="https://github.com/user-attachments/assets/b38c6aad-ca73-43ae-9e4f-559d5e79584b" />
+<img width="1492" height="467" alt="image" src="https://github.com/user-attachments/assets/a0ca7447-0142-4145-ad5d-e87e2d98ca77" />
+
+-->Chnage the instance type and then run command: terraform plan
+<img width="1852" height="960" alt="image" src="https://github.com/user-attachments/assets/e5714215-ad60-49ab-a298-fc7fb56981fb" />
+<img width="1822" height="935" alt="image" src="https://github.com/user-attachments/assets/38ed0c37-9e03-49de-a60e-aa19b470b95b" />
+
+-->Now lets destroy the infrastructure: terraform destroy --auto-approve
+
+-->here facing some issue as we have set the lifecycle.prevent_destroy=true 
+<img width="1865" height="962" alt="image" src="https://github.com/user-attachments/assets/19d0dde0-0ec3-411b-ae60-744e93e3dab1" />
+
+-->So This error is expected and actually proves that your prevent_destroy lifecycle rule is working correctly.
+<img width="872" height="510" alt="image" src="https://github.com/user-attachments/assets/6182cf50-5a4b-49b2-b8cc-1128f1a18adc" />
+
+-->Terraform tries to delete the bucket, but prevent_destroy = true blocks it.
+**Why This Happens:** prevent_destroy is designed to protect important resources from accidental deletion.
+<img width="892" height="395" alt="image" src="https://github.com/user-attachments/assets/e10616af-872a-4a5b-a847-aba8005b97c7" />
+
+-->So to complete the destroy step simply remove the lifecycle block if it only contained prevent_destroy.
+
+-->Now first run terraform plan
+
+-->terraform apply --auto-approve
+
+-->terraform destroy --auto-approve
+
+<img width="1832" height="942" alt="image" src="https://github.com/user-attachments/assets/32cda76a-4960-433c-95ac-0b941bb0cf54" />
+
+<img width="1852" height="966" alt="image" src="https://github.com/user-attachments/assets/839c8737-57bf-42f4-9219-59ed39282701" />
+
+<img width="1842" height="957" alt="image" src="https://github.com/user-attachments/assets/5bdb1791-362c-4d61-bdc5-ef596aca93c4" />
+
+What You Should Learn:
+<img width="870" height="341" alt="image" src="https://github.com/user-attachments/assets/6bcb55b2-94a4-4316-bf2a-bca5485bb674" />
 
 ---
 
