@@ -502,6 +502,8 @@ Step 4: Destroy Everything: terraform destroy So Terraform will display everythi
 
 <img width="1842" height="957" alt="image" src="https://github.com/user-attachments/assets/5bdb1791-362c-4d61-bdc5-ef596aca93c4" />
 
+<img width="1862" height="980" alt="image" src="https://github.com/user-attachments/assets/c069e5fc-8e88-4399-9973-510be4e458c8" />
+
 What You Should Learn:
 <img width="870" height="341" alt="image" src="https://github.com/user-attachments/assets/6bcb55b2-94a4-4316-bf2a-bca5485bb674" />
 
