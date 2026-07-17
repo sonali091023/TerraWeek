@@ -513,6 +513,20 @@ Step 7: Observe native state locking: with: use_lockfile = true
 
 **Commands used:**
 
+-->cd backend_demo
+
+-->aws s3 ls
+
+-->terraform init
+
+-->terraform validate
+
+-->terraform plan
+
+-->terraform apply --auto-approve
+
+-->terrafrom state list
+
 <img width="1852" height="887" alt="image" src="https://github.com/user-attachments/assets/2db73355-db29-46fd-a9ba-4105699f3a82" />
 
 <img width="1861" height="961" alt="image" src="https://github.com/user-attachments/assets/42d1f97d-8117-4832-942c-d26cfa02fd9f" />
@@ -640,6 +654,36 @@ Step 10: Confirm no changes: terraform plan
 
 <img width="737" height="207" alt="image" src="https://github.com/user-attachments/assets/22b96a98-ae60-477e-b927-7b7d62417122" />
 
+**Commands used:**
+
+-->mkdir day04-import && cd day04-import
+
+-->Create main.tf, provider.tf & import.tf
+
+-->terraform init
+
+-->aws s3 ls OR aws s3api head-bucket --bucket terraweek-2026-state-bucket-sonali
+
+-->Generate the import plan and configuration: terraform plan -generate-config-out=generated.tf 
+
+-->[expected: This attempts to: Find the existing resource, Generate a Terraform configuration file (generated.tf) if needed & Show the import plan.
+
+-->terraform apply [Expected: Terraform imports the existing resource into the state.]
+
+-->Verify the imported resource: terraform state list
+
+-->Inspect the imported resource: terraform state show aws_s3_bucket.imported
+
+-->Verify no further changes are needed: terraform plan
+
+<img width="1860" height="977" alt="image" src="https://github.com/user-attachments/assets/85ea4d66-cf8e-4548-beb0-cfe2945d0038" />
+
+<img width="1866" height="982" alt="image" src="https://github.com/user-attachments/assets/ef16645d-3c35-4c2d-b797-33036a7dab1d" />
+
+<img width="1841" height="981" alt="image" src="https://github.com/user-attachments/assets/c89940de-ba83-45a8-aa39-cfc1ed79361c" />
+
+<img width="1857" height="967" alt="image" src="https://github.com/user-attachments/assets/d9f14989-d1e6-497c-8083-4a9e09a48e56" />
+
 **Q. What happened?**
 
 <img width="682" height="486" alt="image" src="https://github.com/user-attachments/assets/7aba4af5-98a0-4562-b4ea-ba775e5d9e20" />
@@ -684,11 +728,6 @@ Step 10: Confirm no changes: terraform plan
 **Q5: Why review generated.tf before applying?**
 
 -->The generated configuration may include provider defaults or attributes you don't want to manage. Reviewing it helps keep your Terraform code clean, maintainable, and aligned with your intended infrastructure.
-
-
-
-
-
 
 > 📚 **Reference the companion repo** for the full set of state/refactor blocks, each in a commented file:
 > [`examples/import.tf`](https://github.com/LondheShubham153/terraform-for-devops/blob/main/examples/import.tf) · [`examples/moved.tf`](https://github.com/LondheShubham153/terraform-for-devops/blob/main/examples/moved.tf) · [`examples/removed.tf`](https://github.com/LondheShubham153/terraform-for-devops/blob/main/examples/removed.tf) · [`examples/check.tf`](https://github.com/LondheShubham153/terraform-for-devops/blob/main/examples/check.tf)
