@@ -148,7 +148,9 @@ Terraform and AWS EC2 instances, you can reuse one of your existing projects.
 
 **Prerequisites:** Use any working Terraform project, for example:
 
--->cd backend_demo [Ensure resources already exist]
+-->cd terraform-practice
+
+-->cd backend_demo [Ensure resources already exist:
 
 -->terraform init
 
@@ -242,6 +244,35 @@ Step 5: Display the Entire State: terraform show
 - Inspect resource values.
 - Understand what Terraform currently manages.
 
+**Commands used:** 
+
+-->terraform init
+
+-->aws s3 ls
+
+-->cd .. && cd backend_infra
+
+-->terraform init
+
+-->terraform validate
+
+-->terraform plan
+
+-->terraform apply --auto-approve
+
+-->aws sts get-caller-identity
+
+-->aws s3 ls
+
+-->cd .. && cd backend_demo
+
+-->ls
+
+<img width="1827" height="951" alt="image" src="https://github.com/user-attachments/assets/956efad0-fe55-4ae9-936f-e05cfc2ed1d8" />
+<img width="1816" height="942" alt="image" src="https://github.com/user-attachments/assets/564fb7cd-b9c8-4612-99b8-66205e9c27ae" />
+<img width="1847" height="940" alt="image" src="https://github.com/user-attachments/assets/e57e92fb-572c-4dfd-9c50-23bdeeda3efd" />
+<img width="1847" height="957" alt="image" src="https://github.com/user-attachments/assets/39e711fc-ac49-45df-b089-070e98f4ec7a" />
+
 **Visual Summary:**
 <img width="661" height="341" alt="image" src="https://github.com/user-attachments/assets/987e31b4-7a99-43ef-9330-4e9885285cfb" />
 
@@ -276,10 +307,6 @@ Command Summary:
 **Q5: Why use terraform show instead of opening terraform.tfstate?**
 
 -->terraform show presents the state in a human-readable format, while terraform.tfstate is raw JSON intended for Terraform's internal use.
-
-
-
-
 
 ### Task 3: Bootstrap the Backend Infrastructure
 The S3 bucket that *holds* your state must exist **before** you configure the backend. Use [`./backend_infra`](./backend_infra) to create it (**local** state for this bootstrap step only):
@@ -366,6 +393,20 @@ Understanding What Was Created: A typical backend_infra configuration creates:
 
 -->Terraform migrates the state from local storage to the S3 bucket (or initializes remote state if it's a new project).
 
+Commands used: 
+
+-->cd backend_infra
+
+-->terraform init
+
+-->terraform validate
+
+-->terraform plan
+
+-->terrafrom apply --auto-approve
+
+<img width="1487" height="470" alt="image" src="https://github.com/user-attachments/assets/c766b81d-788e-4581-a8dc-aaddf8d5d2ae" />
+
 **Workflow Diagram:**
 
 <img width="647" height="472" alt="image" src="https://github.com/user-attachments/assets/75acdc7d-4b2c-4a03-8cab-841ebe9ed4c8" />
@@ -400,9 +441,6 @@ Understanding What Was Created: A typical backend_infra configuration creates:
 
 -->A public state bucket could expose details about your infrastructure and potentially sensitive values, creating a significant security risk.
 
-
-
-
 ### Task 4: Configure the Remote Backend with Native Locking
 Now point a real config at that bucket. See [`./backend_demo`](./backend_demo):
 ```hcl
@@ -422,7 +460,6 @@ terraform init     # Terraform will offer to migrate local state → S3
 terraform apply
 ```
 Verify in the S3 console that your `terraform.tfstate` is uploaded, and watch a `.tflock` file appear/disappear during an apply.
-
 
 **Steps to follow:**
 
@@ -473,6 +510,16 @@ Step 7: Observe native state locking: with: use_lockfile = true
 <img width="732" height="426" alt="image" src="https://github.com/user-attachments/assets/14ec94b2-23c4-4aeb-8804-4bd99d66be1e" />
 
 <img width="831" height="327" alt="image" src="https://github.com/user-attachments/assets/c23671fd-90e5-4689-88ea-8e49270bf44f" />
+
+**Commands used:**
+
+<img width="1852" height="887" alt="image" src="https://github.com/user-attachments/assets/2db73355-db29-46fd-a9ba-4105699f3a82" />
+
+<img width="1861" height="961" alt="image" src="https://github.com/user-attachments/assets/42d1f97d-8117-4832-942c-d26cfa02fd9f" />
+
+<img width="1907" height="937" alt="image" src="https://github.com/user-attachments/assets/5d06f4dd-16c8-4cd0-ad3e-b8e3cf735c67" />
+
+<img width="1917" height="847" alt="image" src="https://github.com/user-attachments/assets/b302ccab-6f31-460e-a956-9960bb3f6959" />
 
 **Architecture:**
 
