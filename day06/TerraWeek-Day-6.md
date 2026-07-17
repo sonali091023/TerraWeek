@@ -34,6 +34,10 @@ locals {
 ```
 - Discuss the **trade-offs**: workspaces vs separate directories/backends per environment.
 
+**Steps to follow:**
+
+
+
 ### Task 2: Quality Gates — `fmt`, `validate`, `test`
 - Format and validate everything:
 ```bash
