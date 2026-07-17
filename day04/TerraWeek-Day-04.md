@@ -148,9 +148,7 @@ Terraform and AWS EC2 instances, you can reuse one of your existing projects.
 
 **Prerequisites:** Use any working Terraform project, for example:
 
--->cd terraform-practice
-
--->cd backend_demo [Ensure resources already exist:
+-->cd backend_demo [Ensure resources already exist]
 
 -->terraform init
 
