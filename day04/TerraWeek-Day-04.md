@@ -50,7 +50,9 @@ Task 1: Why State Matters:
   - which resources it created
   - the IDs assigned by the cloud provider
   - what changes need to be made
+
 <img width="887" height="557" alt="image" src="https://github.com/user-attachments/assets/82fa6c07-3d68-4e08-9efe-105a1acd54a7" />
+
 <img width="885" height="787" alt="image" src="https://github.com/user-attachments/assets/ebe5be75-6fa3-434f-af2e-1dbf996ae3c4" />
 
 **Q. Why Terraform Needs State?**
@@ -59,6 +61,7 @@ Task 1: Why State Matters:
 So Without state Terraform cannot know that the instance already exists. It might try to create another EC2 instance. The state file prevents this. 
 
 -->It lets Terraform compare: 
+
 <img width="762" height="126" alt="image" src="https://github.com/user-attachments/assets/a454ea03-7175-4c4c-8e22-517ad9ad0f89" />
 
 Then Terraform performs only the necessary changes.
@@ -67,18 +70,23 @@ Then Terraform performs only the necessary changes.
 
 -->Although it is just JSON, you should never edit it by hand.
 <img width="732" height="740" alt="image" src="https://github.com/user-attachments/assets/aa3bb6f0-e1c8-457f-a520-d48041ace7f5" />
+
 <img width="687" height="577" alt="image" src="https://github.com/user-attachments/assets/3049f69e-66b7-41a2-8ed9-6969260e6817" />
 
 **Q. Why should you never commit it to Git?**
 
 -->The state file often contains sensitive information.
+
 <img width="711" height="632" alt="image" src="https://github.com/user-attachments/assets/1a8c8c98-410e-44fc-93f5-41f7ff19ba1f" />
 
 **3. What is State Drift?**
 
 -->State drift happens when the real infrastructure changes outside Terraform, so the actual infrastructure no longer matches Terraform's recorded state or configuration.
+
 <img width="712" height="592" alt="image" src="https://github.com/user-attachments/assets/403ee34f-1ff2-4b70-a919-63b1f7baf045" />
+
 <img width="710" height="582" alt="image" src="https://github.com/user-attachments/assets/9a11059b-7eb6-4014-a1fe-1da871a9cb5f" />
+
 <img width="741" height="605" alt="image" src="https://github.com/user-attachments/assets/9ad207f9-aa73-4286-9556-34e6b1604fbc" />
 
 **Note:** In modern Terraform versions, terraform refresh is largely replaced by terraform apply -refresh-only, and terraform plan automatically refreshes state before generating a plan.
@@ -86,6 +94,7 @@ Then Terraform performs only the necessary changes.
 **4. Why is State Sensitive?**
 
 -->The state file can contain sensitive data in plaintext.
+
 <img width="677" height="397" alt="image" src="https://github.com/user-attachments/assets/b30abf3d-ec95-4e35-8c2c-6c7dca53c7c9" />
 
 -->Even if a Terraform variable is marked as sensitive, the value may still be stored in the state file so Terraform can manage the resource correctly. 
