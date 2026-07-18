@@ -1,12 +1,13 @@
 # Locals: compute derived values once, reuse everywhere.
 locals {
-  name_prefix = "tws-${var.environment}"
+  name_prefix = "tws-${var.environment}-${var.project_name}"
 
   common_labels = merge(
     {
       project     = "terraweek"
       environment = var.environment
       managed_by  = "terraform"
+      server_name = upper(local.name_prefix)
     },
     var.extra_labels,
   )

@@ -41,3 +41,9 @@ variable "extra_labels" {
     team = "trainwithshubham"
   }
 }
+
+variable "project_name" {
+  description = "Name of the project."
+  type        = string
+  default     = "terraweek-web"
+}
