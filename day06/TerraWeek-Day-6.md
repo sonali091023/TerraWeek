@@ -36,6 +36,36 @@ locals {
 
 **Steps to follow:**
 
+**Workspaces & Environments:** Objective: 
+
+**Learn:**
+
+- What Terraform workspaces are
+- How workspaces isolate state
+- How to create and switch workspaces
+- How to use terraform.workspace in your configuration
+- The trade-offs between workspaces and separate directories/backends
+
+**Q. What is a Terraform Workspace?**
+
+-->A workspace is an isolated instance of Terraform state. Each workspace has its own state file, allowing you to deploy the same configuration multiple times with different infrastructure.
+
+<img width="667" height="257" alt="image" src="https://github.com/user-attachments/assets/78cf0581-0b0d-4780-967f-c69932666573" />
+
+-->Although the configuration is the same, each workspace manages its own infrastructure independently.
+
+**Default Workspace:** 
+
+-->When you initialize Terraform: terraform init [Expected: Terraform automatically creates a workspace called: default]
+
+-->To confirm Check the current workspace: terraform workspace show [Expected: output should be default]
+
+**List Existing Workspaces:**
+
+
+
+
+
 
 
 ### Task 2: Quality Gates — `fmt`, `validate`, `test`
