@@ -474,12 +474,31 @@ Explain why **pinning matters** (reproducible builds, no surprise breaking chang
 
 -->Version locking means specifying the exact version (or an allowed version range) of a Terraform module so Terraform always downloads a predictable version instead of the latest one. Without version locking, a newer release could introduce breaking changes and cause your infrastructure to fail.
 
+**1. Registry Module Version Locking:** Terraform Registry modules support the version argument.
 
+<img width="642" height="552" alt="image" src="https://github.com/user-attachments/assets/a19c9f76-e394-43be-a2ef-77160bd99bc5" />
 
+<img width="671" height="345" alt="image" src="https://github.com/user-attachments/assets/4e6b76e9-2387-43dd-8286-4c466395ee39" />
 
+<img width="632" height="456" alt="image" src="https://github.com/user-attachments/assets/47e0b4e5-6468-40c8-a7ea-51aff9be217a" />
 
+2. Git Tag / Git Reference: Terraform modules can also be stored in Git repositories.
 
+<img width="712" height="317" alt="image" src="https://github.com/user-attachments/assets/c580558f-a68a-435e-870a-4a85c317fed9" />
 
+3. Git Commit SHA (Most Immutable): Instead of a tag, you can reference a specific commit:
+
+<img width="712" height="270" alt="image" src="https://github.com/user-attachments/assets/cead24da-fb70-40c3-a4cf-0f5b76062a63" />
+
+**Comparison Table:**
+
+<img width="805" height="287" alt="image" src="https://github.com/user-attachments/assets/e4dcf174-8a4a-4a09-8003-f8992fa4b8f1" />
+
+**Why Pinning Matters:** Version pinning is important because it provides:
+- **Reproducible builds:** Every developer and CI/CD pipeline uses the same module version, so deployments are consistent.
+- **Protection from breaking changes:** New major releases may change module behavior or remove features. Pinning prevents unexpected failures.
+- **Stable collaboration:** Team members all work with the same version, reducing "it works on my machine" issues.
+- **Controlled upgrades:** You choose when to update to a newer version, test it, and then change the version constraint deliberately.
 
 > 📚 **Reference the companion repo:** [`aws_module_project/`](https://github.com/LondheShubham153/terraform-for-devops/tree/main/aws_module_project) is a real multi-environment example — one reusable [`my_app_infra_module`](https://github.com/LondheShubham153/terraform-for-devops/tree/main/aws_module_project/my_app_infra_module) (EC2 + S3 + DynamoDB) instantiated three times for **dev / stg / prd** with different instance sizes. Study how [`main.tf`](https://github.com/LondheShubham153/terraform-for-devops/blob/main/aws_module_project/main.tf) passes inputs and reads outputs.
 
