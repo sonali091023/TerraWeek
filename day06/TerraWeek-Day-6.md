@@ -308,11 +308,11 @@ Create a GitHub Actions workflow that automatically runs:
 
 -->on every Pull Request.
 
-Step 1: Copy the Starter Workflow: 
+<img width="1890" height="877" alt="image" src="https://github.com/user-attachments/assets/86f37127-62ae-4dcf-a57c-365373d00df0" />
 
+<img width="1917" height="947" alt="image" src="https://github.com/user-attachments/assets/c693f574-4653-4026-b8c2-4e16b7f6dd00" />
 
-
-
+<img width="1892" height="972" alt="image" src="https://github.com/user-attachments/assets/d5512161-2843-4159-aab2-82e6b6ed7047" />
 
 ### Task 5: Best Practices Checklist
 Document how your capstone honors these:
@@ -322,6 +322,14 @@ Document how your capstone honors these:
 - ✅ **No hard-coded secrets** — use variables / env / a secrets manager.
 - ✅ `fmt` + `validate` + `test` + a security scan in CI.
 - ✅ A clear **`README.md`** and a working `terraform destroy`.
+
+**Steps to follow:**
+
+-->This task is mainly about documenting the Terraform best practices you've followed throughout your TerraWeek project. You don't need to write new Terraform code unless something is missing. You should add these points to your README.md (or notes) and verify that your project follows them.
+
+-->Best Practices Checklist: Create Notes.md
+
+(Notes.md)[https://github.com/sonali091023/TerraWeek/blob/main/day06/Notes.md]
 
 ---
 
