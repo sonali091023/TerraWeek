@@ -283,14 +283,36 @@ Step 3: Scan the Terraform code: trivy config . [Here The . means "scan the curr
 
 <img width="641" height="297" alt="image" src="https://github.com/user-attachments/assets/6945fe3f-bbe7-4a99-b718-914e3d8059e2" />
 
+<img width="1806" height="742" alt="image" src="https://github.com/user-attachments/assets/1e3b4382-07b4-4ecc-adaf-2cc2f1f36ce9" />
 
+<img width="1787" height="922" alt="image" src="https://github.com/user-attachments/assets/0cf3c532-8af9-4214-8a9b-904084c9f25a" />
 
-
+<img width="1127" height="257" alt="image" src="https://github.com/user-attachments/assets/f9618e36-f4cc-4d0a-a785-e7f06fe9bb77" />
 
 ### Task 4: CI/CD with GitHub Actions
 - Use the starter workflow at [`./example/.github-workflow-example.yml`](./example/.github-workflow-example.yml).
 - Copy it to `.github/workflows/terraform.yml` in your repo.
 - It runs `fmt -check`, `init`, `validate`, and `plan` on every PR. Explain each step.
+
+**Steps to follow:**
+
+-->This task is about automating Terraform validation using GitHub Actions. Every time someone opens or updates a Pull Request (PR), GitHub Actions automatically checks that the Terraform code is properly formatted, valid, and can generate a plan.
+
+**CI/CD with GitHub Actions:** Objective
+
+Create a GitHub Actions workflow that automatically runs:
+- terraform fmt -check
+- terraform init
+- terraform validate
+- terraform plan
+
+-->on every Pull Request.
+
+Step 1: Copy the Starter Workflow: 
+
+
+
+
 
 ### Task 5: Best Practices Checklist
 Document how your capstone honors these:
