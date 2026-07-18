@@ -346,20 +346,20 @@ If you still receive a Free Tier error, make sure every module instance is using
 
 -->Clean Up: terraform destroy [Expected: Terraform will remove all three EC2 instances created by the for_each loop.]
 
+
+<img width="1835" height="945" alt="image" src="https://github.com/user-attachments/assets/d64e1a89-10ec-4fd9-895d-3e18ea17948c" />
+
+<img width="1866" height="965" alt="image" src="https://github.com/user-attachments/assets/21277ebc-be1b-46c8-b0e2-79caf4f7070d" />
+
+<img width="1852" height="971" alt="image" src="https://github.com/user-attachments/assets/4f47e79d-8553-4ce5-9469-30ba0c4cf0cc" />
+
+<img width="1852" height="962" alt="image" src="https://github.com/user-attachments/assets/518603a6-0bda-4ede-b22b-1aefbc3e8617" />
+
 **Key Takeaways:**
 -for_each lets you create multiple instances of the same module without duplicating code.
 - each.key provides the current item from the collection and is useful for naming resources.
 - Terraform tracks each module instance separately (for example, module.servers["app"]).
 - Shared values like the AMI ID, subnet ID, and security group IDs should be looked up once in the root module and passed into every module instance, making the module reusable and efficient.
-
-
-
-
-
-
-
-
-
 
 ### Task 4: Consume a Registry Module + Version Locking
 Use a real, popular module from the **[Terraform Registry](https://registry.terraform.io/)** — e.g. the official AWS VPC module — and **pin its version**:
@@ -374,6 +374,87 @@ module "vpc" {
 }
 ```
 
+**Steps to follow:**
+
+-->This task teaches you how to use Terraform Registry modules, which is how most real-world Terraform projects are built. Instead of writing every resource yourself, you can reuse community-maintained modules.
+
+**Consume a Registry Module + Version Locking:** Objective: Learn how to:
+- Use a module from the Terraform Registry.
+- Pin the module version.
+- Understand why version locking is important.
+- Initialize and use registry modules.
+
+**Q. What is the Terraform Registry?**
+
+-->The Terraform Registry is a public repository of reusable Terraform modules and providers. You can find modules for: AWS, Azure, Google Cloud, Kubernetes, GitHub, Helm, Docker, Many other services. So Instead of writing 100+ lines of VPC configuration yourself, you can use the well-tested AWS VPC module.
+
+**Q. Why use a Registry Module?**
+
+-->Suppose you want to create a VPC. 
+
+-->So Without a module You would need to define resources such as:
+
+<img width="665" height="282" alt="image" src="https://github.com/user-attachments/assets/d0d6c66b-cc77-49a4-b55f-ba9e0dae21d9" />
+
+-->With a module You can achieve the same with:
+
+<img width="691" height="465" alt="image" src="https://github.com/user-attachments/assets/7d8d7e97-92ac-4aaa-9ab3-0f2a05eb9949" />
+
+**Understanding the Module Block:**
+
+<img width="691" height="600" alt="image" src="https://github.com/user-attachments/assets/3d04bbe7-fe59-4709-be60-de4cb206f54f" />
+
+**Why Version Locking Matters:** Imagine you omit the version:
+
+<img width="690" height="791" alt="image" src="https://github.com/user-attachments/assets/3e336edc-f71f-4e11-b2b9-c849d36a440e" />
+
+**Example Project Structure:**
+
+-->Initialize the module: terraform init
+
+<img width="727" height="727" alt="image" src="https://github.com/user-attachments/assets/758f2395-e853-4f5b-a4de-a322a1def739" />
+
+-->Validate the Configuration: terraform validate [Here Terraform checks the syntax and module configuration.]
+
+-->Review the Plan: terraform plan Here You'll see that the VPC module expands into many AWS resources, such as:
+- VPC
+- Public subnets
+- Private subnets
+- Route tables
+- Internet Gateway
+- Security groups (depending on configuration)
+
+-->Even though you only wrote one module block, Terraform plans all the resources managed by that module.
+
+-->terraform apply [Resources will get create]
+
+-->terraform destroy [This removes all resources created by the VPC module.]
+
+<img width="1852" height="956" alt="image" src="https://github.com/user-attachments/assets/71d618df-a76b-4711-8ab2-0616ecc8cf84" />
+
+<img width="1852" height="957" alt="image" src="https://github.com/user-attachments/assets/d7f06fdb-b603-4710-ba76-5e1d57d44321" />
+
+<img width="1866" height="971" alt="image" src="https://github.com/user-attachments/assets/6d8c992d-e719-4cb4-8a42-15802fa7f1de" />
+
+<img width="1855" height="946" alt="image" src="https://github.com/user-attachments/assets/1de54ed8-a710-4848-b1a2-3cc6f85208b8" />
+
+<img width="1861" height="972" alt="image" src="https://github.com/user-attachments/assets/c92440a9-7de4-409f-8967-b4f0aeeeb545" />
+
+<img width="1837" height="947" alt="image" src="https://github.com/user-attachments/assets/0007bfee-a794-4ec4-8c00-bae364f5b1c3" />
+
+**Best Practices:**
+- Always pin the version of Registry modules.
+- Read the module documentation before using it to understand required and optional inputs.
+- Use official or well-maintained community modules.
+- Keep reusable modules (like your EC2 module) in your repository, and consume widely used infrastructure modules (like VPC) from the Registry.
+
+**Summary:**
+- A Registry module is a reusable Terraform module published in the Terraform Registry.
+- source = "terraform-aws-modules/vpc/aws" tells Terraform where to download the module from.
+- version = "~> 5.0" locks the module to compatible 5.x releases, preventing unexpected breaking changes.
+- terraform init downloads both the provider and the module.
+- Registry modules simplify infrastructure by replacing large amounts of Terraform code with a small, reusable module block.
+
 ### Task 5: Ways to Lock Module Versions
 Document, with code snippets, **each** way to pin a module source:
 - **Registry:** `version = "~> 5.0"` (also `= 5.1.2`, `>= 5.0, < 6.0`).
@@ -382,6 +463,23 @@ Document, with code snippets, **each** way to pin a module source:
 Explain why **pinning matters** (reproducible builds, no surprise breaking changes).
 
 ---
+
+**Steps to follow:**
+
+-->This task is mainly about understanding and documenting the different ways to lock module versions. You don't need to run all of these examples—you just need to explain them with code snippets.
+
+**Ways to Lock Module Versions:**
+
+**Q. What is Version Locking?**
+
+-->Version locking means specifying the exact version (or an allowed version range) of a Terraform module so Terraform always downloads a predictable version instead of the latest one. Without version locking, a newer release could introduce breaking changes and cause your infrastructure to fail.
+
+
+
+
+
+
+
 
 > 📚 **Reference the companion repo:** [`aws_module_project/`](https://github.com/LondheShubham153/terraform-for-devops/tree/main/aws_module_project) is a real multi-environment example — one reusable [`my_app_infra_module`](https://github.com/LondheShubham153/terraform-for-devops/tree/main/aws_module_project/my_app_infra_module) (EC2 + S3 + DynamoDB) instantiated three times for **dev / stg / prd** with different instance sizes. Study how [`main.tf`](https://github.com/LondheShubham153/terraform-for-devops/blob/main/aws_module_project/main.tf) passes inputs and reads outputs.
 
