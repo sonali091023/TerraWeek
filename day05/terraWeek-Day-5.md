@@ -292,6 +292,75 @@ module "servers" {
 ```
 Add this to the root module and observe the plan.
 
+**Steps to follow:**
+
+-->This task introduces one of Terraform's most powerful features: for_each with modules. Instead of copying and pasting the same module three times, you use a loop to create multiple EC2 instances from a single module definition.
+
+Modular Composition (for_each): Objective: Learn how to:
+- Instantiate the same module multiple times.
+- Use for_each to avoid duplicate code.
+- Give each EC2 instance a unique name.
+- Understand how Terraform tracks multiple module instances.
+
+**Before for_each:**
+<img width="656" height="797" alt="image" src="https://github.com/user-attachments/assets/b94df575-a4b3-460f-89c9-d6fbb133ccf4" />
+
+**Using for_each:**
+
+<img width="677" height="322" alt="image" src="https://github.com/user-attachments/assets/40a65c32-814d-462c-8ba1-93d50ff0df89" />
+
+**Understanding Each Line:**
+
+<img width="672" height="632" alt="image" src="https://github.com/user-attachments/assets/447d92e5-701e-472f-85e0-582c77d494be" />
+<img width="707" height="407" alt="image" src="https://github.com/user-attachments/assets/4a1b3993-bd95-49a6-b67e-5d3b9bc4c585" />
+
+**Visual Flow:**
+
+<img width="672" height="317" alt="image" src="https://github.com/user-attachments/assets/ef040b92-4a64-445e-bf66-6fbf967273bc" />
+
+**Module Inputs:**
+
+<img width="692" height="347" alt="image" src="https://github.com/user-attachments/assets/b7eafb78-818a-44c2-853f-24d73c4e2271" />
+
+What Terraform Creates: Terraform creates three module instances:
+
+<img width="670" height="332" alt="image" src="https://github.com/user-attachments/assets/a9898bc1-6189-4e58-92e0-84c456797a9a" />
+
+Expected terraform plan: Run terraform plan
+
+<img width="667" height="232" alt="image" src="https://github.com/user-attachments/assets/b9e2fe6e-7029-4ea0-88b7-d48f932dbc4d" />
+
+Output Values for Multiple Modules: Since there are multiple module instances, you can't write:
+
+<img width="661" height="522" alt="image" src="https://github.com/user-attachments/assets/98a71d80-545a-42cc-8a8d-b2e51d636f65" />
+
+Apply the Configuration: Run the standard Terraform workflow:
+
+-->terraform init
+
+-->terraform plan
+
+-->terraform apply
+
+If you still receive a Free Tier error, make sure every module instance is using a Free Tier eligible instance type (such as t2.micro if that's what your AWS account supports).
+
+-->Clean Up: terraform destroy [Expected: Terraform will remove all three EC2 instances created by the for_each loop.]
+
+**Key Takeaways:**
+-for_each lets you create multiple instances of the same module without duplicating code.
+- each.key provides the current item from the collection and is useful for naming resources.
+- Terraform tracks each module instance separately (for example, module.servers["app"]).
+- Shared values like the AMI ID, subnet ID, and security group IDs should be looked up once in the root module and passed into every module instance, making the module reusable and efficient.
+
+
+
+
+
+
+
+
+
+
 ### Task 4: Consume a Registry Module + Version Locking
 Use a real, popular module from the **[Terraform Registry](https://registry.terraform.io/)** — e.g. the official AWS VPC module — and **pin its version**:
 ```hcl
