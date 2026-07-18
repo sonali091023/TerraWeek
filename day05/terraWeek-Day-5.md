@@ -167,6 +167,114 @@ terraform apply
 terraform destroy
 ```
 
+**Steps to follow:**
+
+-->This task teaches one of the most important Terraform best practices: creating reusable modules. Instead of writing the EC2 configuration multiple times, you write it once in a module and call it whenever you need another instance.
+
+**Write Your Own Module:**
+
+**Objective: You will learn:**
+- How to create a reusable Terraform module
+- How the root module calls another module
+- Why data sources should be resolved in the root module
+- How module inputs and outputs work
+
+Step 1: Understand the Project Structure
+
+<img width="1317" height="312" alt="image" src="https://github.com/user-attachments/assets/bdd3e9a7-af20-4fcf-8190-6fdb5e03679a" />
+
+<img width="717" height="352" alt="image" src="https://github.com/user-attachments/assets/a9b24cc3-2760-4499-8e54-bdd354b73447" />
+
+Step 2: What the Root Module Does: The root module is responsible for finding existing AWS resources.
+
+<img width="717" height="507" alt="image" src="https://github.com/user-attachments/assets/13cb7cb6-d276-4909-92e6-a4e94cd6212f" />
+
+Step 3: Calling the Module: The root module contains:
+<img width="706" height="610" alt="image" src="https://github.com/user-attachments/assets/acaaff60-a630-43dd-b11c-7c4b564d5d4e" />
+<img width="717" height="252" alt="image" src="https://github.com/user-attachments/assets/ae573914-4297-45ed-8240-843b72bfb567" />
+
+<img width="701" height="852" alt="image" src="https://github.com/user-attachments/assets/754b4675-3837-40bf-bbe5-5824e5c15889" />
+
+Step 4: Module Variables: Inside modules/ec2_instance/variables.tf
+
+<img width="690" height="312" alt="image" src="https://github.com/user-attachments/assets/d9d26df4-4ae0-47e2-a7ac-5dd54533fd1a" />
+
+Step 5: Module Main File: Inside modules/ec2_instance/main.tf 
+
+<img width="666" height="660" alt="image" src="https://github.com/user-attachments/assets/6ac89997-891c-46e1-8e54-f119c774fb38" />
+
+Step 6: Module Outputs: 
+
+<img width="656" height="287" alt="image" src="https://github.com/user-attachments/assets/b8e89574-52a1-4215-8f66-da980557f832" />
+
+Step 7: Reading Module Outputs: Back in the root module: 
+
+<img width="700" height="635" alt="image" src="https://github.com/user-attachments/assets/ceed8b5c-c2a7-4bcc-bb4d-d556d4947880" />
+
+Step 8: Why the Root Resolves Lookups: 
+
+<img width="685" height="705" alt="image" src="https://github.com/user-attachments/assets/9d4bd7cc-6b70-4608-a0f3-cabc74659186" />
+<img width="697" height="316" alt="image" src="https://github.com/user-attachments/assets/d24d2c5f-fd8f-4e33-8095-ac8ca56475d1" />
+
+**More reusable: **
+- The module works in:
+- Default VPC
+- Custom VPC
+- Public subnet
+- Private subnet
+- Any AMI
+- Any region
+
+because it doesn't assume anything.
+
+<img width="692" height="332" alt="image" src="https://github.com/user-attachments/assets/c2d207c7-5f35-48f7-a359-000229bfc4e3" />
+
+Step 9: Initialize Terraform: 
+
+-->Move into the project directory: cd example
+
+-->Initialize Terraform: terraform init
+
+<img width="720" height="337" alt="image" src="https://github.com/user-attachments/assets/9f0a482d-14c2-4899-95fa-68b1bb7cd414" />
+
+Step 10: Review the Execution Plan: terraform plan
+
+<img width="677" height="352" alt="image" src="https://github.com/user-attachments/assets/bb9d88ea-e729-41f5-863a-26b893a55581" />
+
+Step 11: Apply the Configuration: terraform apply --auto-approve
+
+<img width="667" height="461" alt="image" src="https://github.com/user-attachments/assets/a13b8170-0c93-4461-b59b-4da8c7661643" />
+
+Step 12: Destroy the Resources: terraform destroy [Expected: Terraform will remove the EC2 instance and any other resources created by the root module.]
+
+<img width="1857" height="606" alt="image" src="https://github.com/user-attachments/assets/67b8095c-2913-4be8-a8b9-c7736a85da7f" />
+
+<img width="1836" height="972" alt="image" src="https://github.com/user-attachments/assets/f34d77c2-5bdf-419c-9bb9-f88533a667f1" />
+
+<img width="1856" height="947" alt="image" src="https://github.com/user-attachments/assets/bbaa27ef-e9a2-4fb1-99df-8641452f6de2" />
+
+<img width="1865" height="957" alt="image" src="https://github.com/user-attachments/assets/4b927b6a-9914-47a0-952b-91569aabc7d8" />
+
+<img width="1862" height="952" alt="image" src="https://github.com/user-attachments/assets/62067b5d-9053-4b52-8f8d-4b10cfa922c0" />
+
+<img width="1862" height="952" alt="image" src="https://github.com/user-attachments/assets/251665ae-f7a0-4da0-af0d-000b8439133e" />
+
+<img width="1870" height="976" alt="image" src="https://github.com/user-attachments/assets/ca3f1d59-95bb-4010-b2c2-87c7a3c00e69" />
+
+<img width="1917" height="921" alt="image" src="https://github.com/user-attachments/assets/293afbbd-21ee-40ea-a346-d5c47f945d67" />
+
+**Data Flow Diagram: **
+
+<img width="652" height="552" alt="image" src="https://github.com/user-attachments/assets/7571b877-2183-42df-8fdd-35b5ef8b9b52" />
+
+**Key Takeaways:**
+
+- A module is a reusable collection of Terraform resources.
+- The root module is the Terraform configuration you run with terraform init, plan, and apply.
+- Keep data source lookups in the root module and pass IDs into modules as variables. This avoids repeated lookups and makes modules reusable across environments.
+- Variables pass data into a module, while outputs expose useful values from a module back to the root module.
+- Terraform identifies resources created by a module using the module.<module_name> prefix (for example, module.web_server.aws_instance.this).
+
 ### Task 3: Modular Composition (`for_each`)
 Instantiate the **same module multiple times** to build multiple servers cleanly:
 ```hcl
